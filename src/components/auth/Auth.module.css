@@ -1,0 +1,45 @@
+.auth{
+  color:white;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* background:url(https://photo-cdn2.icons8.com/D_U5t1J9lZGP4-Bj8uVpALHwAtcjyyfWf1ZCXQfvmOw/rs:fit:1901:1072/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5l/eHRlcm5hbC9hMmE0/Mi9iYjIzOWUzNzll/MGY0OTBjOWIyZTY3/ZmEwNTJjN2RiNC5q/cGc.jpg);  */
+  /* background-color: #302c2c; */
+}
+
+h1{
+  margin-bottom: 2rem;
+}
+
+.loginForm, .registerForm{
+  display: flex;
+  flex-direction: column;
+}  
+
+ @media screen and (min-width: 400px) { 
+  .loginForm, .registerForm{
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 3rem;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: white;
+    margin: 0rem;
+  }  
+ } 
+
+.linkBtn{
+  margin-top: 1rem;
+  color: white;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+.password{ 
+ margin-bottom: 2rem;
+}

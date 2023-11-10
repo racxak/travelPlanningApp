@@ -1,0 +1,369 @@
+@import '../colors.css';
+
+
+body{
+  color:white;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+  /* background:url(https://photo-cdn2.icons8.com/D_U5t1J9lZGP4-Bj8uVpALHwAtcjyyfWf1ZCXQfvmOw/rs:fit:1901:1072/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5l/eHRlcm5hbC9hMmE0/Mi9iYjIzOWUzNzll/MGY0OTBjOWIyZTY3/ZmEwNTJjN2RiNC5q/cGc.jpg);  */
+  background-color:var(--background-color);
+}
+
+
+.centerBtnEdit{
+  display: flex;
+  justify-content: center;
+}
+.btnEdit{
+  width: 3rem;
+}
+.inputNotes{
+  background-color: transparent;
+  box-shadow: none;
+  color: white;
+    width: 100%;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0px;
+    padding: 0rem;
+    font-size: 18px;
+}
+
+.inputTitle{
+  font-size: 28.8px;          
+  font-weight: bold;     
+  margin-top: 20px;      
+  margin-bottom: 20px;   
+  background-color: transparent;
+  box-shadow: none;
+  color: white;
+    width: 100%;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0px;
+    padding: 0rem;
+  border-bottom: 1px solid;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-size: h2;
+}
+
+
+input{
+  background-color: var(--input-color);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+    width: 17rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+  
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+  background-color:transparent; 
+}
+
+
+label {
+  text-align: left;
+  padding: 0.25rem  0 ;
+}
+
+button{ 
+  background-color: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+.addBtnContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorInput {
+  border: 1px solid var(--error-color);
+  border-radius: 4px;
+}
+
+.errorMessage {
+  color: var(--error-color);
+  font-size: 0.8rem;
+}
+
+.plusBtn{
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+.noteTitle{
+  border-bottom: 1px solid;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.addNote{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh; 
+  margin-bottom: 3vh;
+ }
+
+ .addNew{
+  position: absolute;
+  top: 12vh; 
+  left: 30px;
+ }
+
+ .notes{
+  max-width: 90vw;
+  position: relative;
+  top: 5px;
+  bottom: 5px;
+  left: 5vw;
+  padding: 2vh 5vw ;
+  text-align: left;
+  margin-bottom: 2vh;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+ }
+.addNoteMargin{
+  position: relative;
+  top:18vh;
+}
+
+.closeBtn{
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+  color:white;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.info{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.infoLabel{
+  color: #a3a3a3;
+  font-size: small;
+}
+ 
+.moreBtn{
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+  color:white;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.moreBtnBlock{
+  position: absolute;
+  top: 20px; 
+  right: 20px;
+  color:white;
+  background-color: transparent;
+  font-size: 20px;
+  display: block;
+}
+
+.notes .moreBtn,
+.markersListItem .moreBtn {
+  display: none;
+}
+
+.travels {
+   padding: 0; 
+}
+
+
+.travels:hover {
+  cursor: pointer;
+}
+
+.markersListItem:hover .moreBtn,
+.notes:hover .moreBtn {
+  display: block; 
+}
+
+.markersListItem:active .moreBtn,
+.notes:active .moreBtn {
+  display: block; 
+}
+
+
+.btn {
+  min-width: 130px;
+  height: 40px;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid white;
+  color: white;
+  background-color: transparent;
+}
+.btn:hover {
+  color: var(--background-color);
+}
+.btn:hover:after {
+  width: 100%;
+}
+.btn:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: white;
+}
+
+.scroller{
+  position: relative;
+  top: 18vh;
+  max-height: 82vh;  
+  overflow-y: auto;
+  margin-right: 0.5rem;
+}
+
+.scrollerShrinked{
+  position: relative;
+  top: 17vh;
+  max-height: 57vh;  
+  overflow-y: auto;
+  margin-right: 0.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+/* Sam pasek przewijania */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.noteContent {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-height: 200px; 
+  overflow-y: auto;  
+}
+
+.divClick{
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 5vw;
+  margin-right: 5vw;
+}
+
+.mapAndNotesContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  margin-top: 8rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+
+.locations{
+  width: -webkit-fill-available;
+}
+.markersList{
+ padding-top: 0.3rem;
+ max-height:  88%;
+ overflow-y: auto;
+}
+.searchBar{
+  height: 2rem;
+}
+
+.markersListItem{
+  position: relative;
+  padding: 2vh 3vw ;
+  text-align: left;
+  margin-left: 2vh;
+  margin-right: 2vh;
+  margin-bottom: 1vh;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.longitudeAndLatitude{
+  color: orange;
+  font-size: 11px;
+}
+.center{
+  align-items: center;
+  justify-content: center;
+  margin-left: 2vw;
+}
+
+.reset{
+  all: unset
+}
+
+.editingMarkers{
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  display: block;
+    font-size: 1.17em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.savedLoc{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.markerInfo{
+  font-size: medium;
+  
+}
+

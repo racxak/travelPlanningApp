@@ -1,0 +1,61 @@
+.leaflet-container {
+  height: 100%; 
+  width: 50vw;
+  border-radius: 10px;
+}
+
+.cluster-icon {
+  background-color: #333;
+  height: 2em;
+  width: 2em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  box-shadow: 0 0 0px 5px #fff;
+}
+
+.btn{
+ width: 19rem;
+ height: 2rem;
+ background-color: white;
+ color:#333;
+ border-color:  rgb(75, 70, 70);
+}
+
+.btn:hover{
+  color: white;
+}
+.btn:after {
+  background: rgb(75, 70, 70);
+}
+
+.input-l{
+  
+ width: 19rem;
+  background-color: rgb(75, 70, 70);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: 100;
+      margin: 0.2rem 0;
+      border: none;
+      border-radius: 10px;
+      padding: 1rem;
+}
+
+.leaflet-bar .geosearch { /* more specific selector */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important; /* override styles */
+  border-radius: 100px !important;
+}
+
+.geosearch-input {
+  all: unset;
+  color: white;
+  background-color: white;
+}
+
+.geosearch-button {
+  background-color: black;
+}
