@@ -3,18 +3,15 @@ import Navbar from "../components/navbar/Navbar";
 import AuthUser from "../components/auth/AuthUser";
 import Map from "../components/map/Map";
 import styles from "./Pages.module.css";
-import {AiOutlineMore,AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineMore, AiOutlineSearch } from "react-icons/ai";
 import MoreWindow from "../components/MoreWindow";
-import {
-	collection,
-	updateDoc,
-	doc,
-	onSnapshot,
-} from "firebase/firestore";
+import { collection, updateDoc, doc, onSnapshot, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { journalNotesInputs } from "../components/journalSource";
+import TravelLists from "../components/travelLists/TravelLists";
 
 const travelButtons = [
 	{ label: "Podróże", path: "/twoje-podroze" },
@@ -24,7 +21,7 @@ const travelButtons = [
 
 const TravelPage = () => {
 	const mapRef = useRef(null);
-	
+	const [listTitle, setListTitle] = useState("");
 
 	const { travelId } = useParams();
 	const [userMarkers, setUserMarkers] = useState([]);
@@ -36,8 +33,10 @@ const TravelPage = () => {
 
 	const [searchTerm, setSearchTerm] = useState("");
 	const filteredMarkers = userMarkers.filter((marker) =>
-	`${marker.title} ${marker.geocode[0]} ${marker.geocode[1]} ${marker.info}`.toLowerCase().includes(searchTerm.toLowerCase())
-);
+		`${marker.title} ${marker.geocode[0]} ${marker.geocode[1]} ${marker.info}`
+			.toLowerCase()
+			.includes(searchTerm.toLowerCase())
+	);
 
 	useEffect(() => {
 		if (currentUser && travelId) {
@@ -50,9 +49,23 @@ const TravelPage = () => {
 				});
 				setUserMarkers(markers);
 			});
-			return () => unsubscribe();
+
+			const docRef = doc(db, "allJournals", travelId);
+			getDoc(docRef).then((docSnap) => {
+				if (docSnap.exists()) {
+					setListTitle(docSnap.data().title);
+				} else {
+					console.log("No such document!");
+				}
+			}).catch((error) => {
+				console.log("Error getting document:", error);
+			});
+
+			return () => unsubscribe();	 
 		}
 	}, [currentUser, travelId]);
+
+	
 
 	const handleEdit = (marker) => {
 		setEditingMarkerId(marker.id);
@@ -83,23 +96,25 @@ const TravelPage = () => {
 	return (
 		<div>
 			<Navbar buttons={travelButtons} />
+			<div className={styles.pageContainer}>
+			<h1 className={styles.travelTitleLabel}>{listTitle}</h1>
 			<div className={styles.mapAndNotesContainer}>
+			
 				<Map />
 				<div className={styles.locations}>
 					<h2 className={styles.savedLoc}>Zapisane lokalizacje</h2>
 					<input
-        type="text"
-        placeholder="Znajdź swoje ulubione miejsca"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className={styles.searchBar}
-      />
+						type="text"
+						placeholder="Znajdź swoje ulubione miejsca"
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+						className={styles.searchBar}
+					/>
 
-<div className={styles.markersList}>
-{filteredMarkers.map((marker) => (
-				
-					
+					<div className={styles.markersList}>
+						{filteredMarkers.map((marker) => (
 							<div className={styles.markersListItem} key={marker.id}>
+								{editingMarkerId !== marker.id && (
 								<button
 									className={
 										openMoreId === marker.id
@@ -114,9 +129,11 @@ const TravelPage = () => {
 								>
 									<AiOutlineMore />
 								</button>
+								)}
 								{openMoreId === marker.id && (
 									<MoreWindow
 										isOpen={openMoreId}
+										setIsOpen={setOpenMoreId}
 										id={marker.id}
 										notes={userMarkers}
 										setNotes={setUserMarkers}
@@ -137,24 +154,26 @@ const TravelPage = () => {
 											placeholder="tytuł"
 											onChange={(e) => setEditedMarkerTitle(e.target.value)}
 										/>
-										<span className={`${styles.longitudeAndLatitude}`}
-										style={{ marginBottom: '4px' }}>
+										<span
+											className={`${styles.longitudeAndLatitude}`}
+											style={{ marginBottom: "4px" }}
+										>
 											{marker.geocode[0]}, {marker.geocode[1]}
 										</span>
 										<input
-										  
-											className={`${styles.reset} ${styles.markerInfo}`} 
+											className={`${styles.reset} ${styles.markerInfo}`}
 											type="text"
 											value={editedMarkerInfo}
 											placeholder="notatka"
 											onChange={(e) => setEditedMarkerInfo(e.target.value)}
 										/>
 										<div className={styles.centerBtnEdit}>
-										<button 
-										className={ `${styles.btn} ${styles.btnEdit}` }
-										onClick={() => saveChanges(marker.id)}>
-											Zapisz
-										</button>
+											<button
+												className={`${styles.btn} ${styles.btnEdit}`}
+												onClick={() => saveChanges(marker.id)}
+											>
+												Zapisz
+											</button>
 										</div>
 									</div>
 								) : (
@@ -166,13 +185,14 @@ const TravelPage = () => {
 										<p className={styles.markerInfo}>{marker.info}</p>
 									</>
 								)}
-								
 							</div>
-					 ))}
+						))}
 					</div>
-					
 				</div>
 			</div>
+			<div className={styles.allToDoListsContainer}>
+				<TravelLists />
+			</div></div>
 		</div>
 	);
 };

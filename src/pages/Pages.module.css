@@ -1,5 +1,13 @@
 @import '../colors.css';
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pageContainer {
+  animation: fadeIn 1s ease-out;
+}
 
 body{
   color:white;
@@ -13,6 +21,14 @@ body{
   background-color:var(--background-color);
 }
 
+.editSpan{
+  display: flex;
+  flex-direction: column;
+}
+
+.editSpan button {
+  align-self: center;
+}
 
 .centerBtnEdit{
   display: flex;
@@ -185,8 +201,18 @@ button{
 }
 
 .notes .moreBtn,
-.markersListItem .moreBtn {
+.markersListItem .moreBtn, 
+.card .moreBtn {
   display: none;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.markersListItem {
+  animation: slideIn 0.5s ease-out;
 }
 
 .travels {
@@ -199,18 +225,20 @@ button{
 }
 
 .markersListItem:hover .moreBtn,
+.card:hover .moreBtn,
 .notes:hover .moreBtn {
   display: block; 
 }
 
 .markersListItem:active .moreBtn,
+.card:active .moreBtn,
 .notes:active .moreBtn {
   display: block; 
 }
 
 
 .btn {
-  min-width: 130px;
+  width: 130px;
   height: 40px;
   padding: 5px 10px;
   font-weight: bold;
@@ -295,16 +323,46 @@ button{
   margin-right: 5vw;
 }
 
+.travelTitleLabel{
+  margin-top: 7rem;
+  margin-left: 2rem;
+  text-align: left;
+}
+
 .mapAndNotesContainer{
-  width: 100%;
+  width: 98%;
   display: flex;
   flex-direction: row;
-  height: 80vh;
-  margin-top: 8rem;
+  height: 74vh;
   margin-right: 1rem;
   margin-left: 1rem;
 }
 
+@media (max-width: 768px) {
+  .mapAndNotesContainer {
+      flex-direction: column;
+      height: auto;
+  }
+  .savedLoc{
+    margin-top: 3rem;
+  }
+  .markersListItem{
+    position: relative;
+    padding: 2vh 3vw ;
+    text-align: left;
+    margin-left: 0vh !important;
+    margin-right: 2vh !important;
+    margin-bottom: 1vh;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  .markersList{
+    padding-top: 0.3rem;
+    max-height:  unset;
+    padding-bottom: 1rem;
+   }
+}
 
 .locations{
   width: -webkit-fill-available;
@@ -313,6 +371,7 @@ button{
  padding-top: 0.3rem;
  max-height:  88%;
  overflow-y: auto;
+ padding-bottom: 0.3rem;
 }
 .searchBar{
   height: 2rem;
@@ -341,7 +400,7 @@ button{
 }
 
 .reset{
-  all: unset
+  all: unset;
 }
 
 .editingMarkers{
@@ -364,6 +423,20 @@ button{
 
 .markerInfo{
   font-size: medium;
-  
 }
 
+.allToDoListsContainer{
+  width: -webkit-fill-available;
+  margin-top: 5rem;
+}
+.mouseImage {
+  width: 50px; /* Adjust the size as needed */
+  height: auto;
+  animation: clickAnimation 1s infinite;
+}
+
+@keyframes clickAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); } /* This creates a 'click' effect */
+  100% { transform: scale(1); }
+}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar/Navbar";
-import { AiOutlineUser, AiTwotoneAudio } from "react-icons/ai";
 import AuthUser from "../components/auth/AuthUser";
 import {
 	collection,
 	addDoc,
-	getDocs,
+	doc,
+	updateDoc,
 	query,
 	where,
 	onSnapshot,
@@ -16,9 +16,10 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddNote from "../components/AddNote";
-import { AiOutlineClose, AiOutlineMore } from "react-icons/ai";
+import {AiOutlineMore } from "react-icons/ai";
 import MoreWindow from "../components/MoreWindow";
 import { useNavigate } from "react-router-dom";
+
 
 const AllTravelsPage = ({ inputs }) => {
 	const navigate = useNavigate();
@@ -28,10 +29,12 @@ const AllTravelsPage = ({ inputs }) => {
 		date: "",
 	});
 
+	const [editingNoteId, setEditingNoteId] = useState(null);
+	const [editedNoteTitle, setEditedNoteTitle] = useState("");
+	const [editedNoteDate, setEditedNoteDate] = useState("");
 	const [inputErrors, setInputErrors] = useState({});
 	const { currentUser } = useContext(AuthContext);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
-	const [isMoreOpen, setIsMoreOpen] = useState(false);
 	const [openMoreId, setOpenMoreId] = useState(null);
 
 	const allTravelsButtons = [
@@ -39,6 +42,36 @@ const AllTravelsPage = ({ inputs }) => {
 		{ label: "Dziennik", path: "/dziennik" },
 		{ UserComponent: <AuthUser />, path: "#" },
 	];
+
+	const handleEdit = (note) => { 
+    setEditingNoteId(note.id);
+    setEditedNoteTitle(note.title);
+    setEditedNoteDate(note.date);
+};
+
+const saveChanges = async (id) => {
+			try {
+					const noteDocRef = doc(db, "allJournals", editingNoteId);
+					await updateDoc(noteDocRef, {
+							title: editedNoteTitle,
+							date: editedNoteDate,
+					});
+
+					setNotes(prevNotes =>
+							prevNotes.map(note =>
+									note.id === editingNoteId
+											? { ...note, title: editedNoteTitle, date: editedNoteDate }
+											: note
+							)
+					);
+					setEditingNoteId(null);
+					setEditedNoteTitle("");
+					setEditedNoteDate("");
+
+			} catch (error) {
+					console.log(error);
+			}
+};
 
 	const closePopup = () => {
 		setIsPopupOpen(false);
@@ -75,7 +108,6 @@ const AllTravelsPage = ({ inputs }) => {
 	const handleAdd = async (e) => {
 		e.preventDefault();
 
-		// Weryfikuj, czy wszystkie pola są wypełnione
 		let hasEmptyFields = false;
 		let errors = {};
 		inputs.forEach((input) => {
@@ -87,9 +119,9 @@ const AllTravelsPage = ({ inputs }) => {
 
 		if (hasEmptyFields) {
 			setInputErrors(errors);
-			return; // Nie dodawaj do bazy, jeśli są błędy
+			return; 
 		} else {
-			setInputErrors({}); // Wyczyść błędy
+			setInputErrors({}); 
 		}
 
 		try {
@@ -97,7 +129,6 @@ const AllTravelsPage = ({ inputs }) => {
 				...formData,
 				userUid: currentUser.uid,
 			});
-			// fetchData();
 			closePopup();
 		} catch (err) {
 			console.log(err);
@@ -116,8 +147,9 @@ const AllTravelsPage = ({ inputs }) => {
 	};
 
 	return (
-		<div>
-			<Navbar buttons={allTravelsButtons}></Navbar>
+	<div>
+	<Navbar buttons={allTravelsButtons}></Navbar>
+		<div className={styles.pageContainer}>
 
 			<div className={styles.addNew}>
 				<label> Rozpocznij nową podróż</label>
@@ -150,6 +182,7 @@ const AllTravelsPage = ({ inputs }) => {
 								)}
 							</div>
 						))}
+
 						<div className={styles.info}>
 							<label className={styles.infoLabel}>
 								{" "}
@@ -174,6 +207,7 @@ const AllTravelsPage = ({ inputs }) => {
 				{Array.isArray(notes) &&
 					notes.map((note) => (
 						<div key={note.id} className={`${styles.notes} ${styles.travels}`}>
+							  {editingNoteId !== note.id && (
 							<button
 								className={
 									openMoreId === note.id ? styles.moreBtnBlock : styles.moreBtn
@@ -186,26 +220,57 @@ const AllTravelsPage = ({ inputs }) => {
 							>
 								<AiOutlineMore />
 							</button>
+							)}
 							{openMoreId === note.id && (
 								<MoreWindow
 									isOpen={openMoreId}
+									setIsOpen={setOpenMoreId}
 									id={note.id}
 									notes={notes}
 									setNotes={setNotes}
 									note={note}
+									collectionPath={`allJournals`}
+									isEditing={editingNoteId === note.id}
+									setIsEditing={(isEditing) => {
+										handleEdit(note);
+									}}
 								/>
 							)}
-							<div 
-							className= {styles.divClick}
-							onClick={() => handleDivClick(note)}>
-								<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
-									{note.title}
+							 {editingNoteId === note.id ? (
+            <div className= {styles.divClick}>
+							<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
+                <input
+								type="text"
+								className={styles.reset}
+                    value={editedNoteTitle}
+                    onChange={(e) => setEditedNoteTitle(e.target.value)}
+                />
 								</h2>
-								<span>{note.date}</span>
-							</div>
+								<span className={styles.editSpan}>
+                <input
+								type="date"
+									  className={styles.reset}
+                    value={editedNoteDate}
+                    onChange={(e) => setEditedNoteDate(e.target.value)}
+                />
+                <button onClick={saveChanges}
+								className={styles.btn}>Zapisz</button>
+								</span>
+            </div>
+        ) : (
+						<div 
+						className= {styles.divClick}
+						onClick={() => handleDivClick(note)}>
+							<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
+								{note.title}
+							</h2>
+							<span>{note.date}</span>
+						</div>
+        )}
 						</div>
 					))}
 			</div>
+		</div>
 		</div>
 	);
 };

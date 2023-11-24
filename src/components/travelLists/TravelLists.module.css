@@ -1,0 +1,217 @@
+@import '../../colors.css';
+
+:root {
+  --card_width: 400px;
+  --row_increment: 10px;
+  --card_border_radius: 16px;
+  --form-control-disabled: #959495;
+}
+.yoursListLabel {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  text-align: left;
+}
+
+.fixPositionNewItemWhileEditingContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.checkedItemLabel {
+  text-decoration: line-through;
+  color: gray;
+}
+
+@media (max-width: 768px) {
+  .pin_container {
+    align-self: center;
+    width: auto;
+    position: relative;
+    display: column;
+    justify-content: center; 
+    grid-gap: 0;
+  }  
+
+ 
+  .card {
+    width: auto;
+    position: relative;
+    margin: 5px 10px !important;
+    border-radius: var(--card_border_radius);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.pin_container {
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  column-count: 3;
+  column-gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+
+.card {
+  -webkit-column-break-inside: avoid; 
+  page-break-inside: avoid; 
+  break-inside: avoid-column; 
+  align-self: start;
+  position: relative;
+  padding: 1rem 2rem;
+  margin: 10px;
+  border-radius: var(--card_border_radius);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.listTitle{
+  box-shadow:unset;
+  padding: 10px 0;
+  font-size: large;
+  background-color: transparent;
+  border-radius: unset;
+  width: 100%;
+
+}
+
+.addNew{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.addNewItemList{
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: grey;
+}
+
+.editingItemTitle{
+  background-color: unset;
+  box-shadow: unset;
+  padding: 0;
+  border-radius: unset;
+  text-align: left;
+  width: 100%;
+}
+
+.deleteItemBtn{
+  background-color: transparent;
+  color: gray;
+  position: absolute;
+  right: 30px;
+}
+
+.deleteItemBtn{
+  background-color: transparent;
+  color: gray;
+  position: absolute;
+  right: 30px;
+}
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, 1px) rotate(5deg); }
+  50% { transform: translate(0, 0) rotate(0eg); }
+  75% { transform: translate(-1px, 1px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.deleteItemBtn:hover{
+  animation: shake 0.25s infinite;
+}
+
+.widthFixed{
+  width: 100% !important;
+}
+
+.centerListItems input[type="checkbox"]{
+  all:unset;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-right: 7px;
+  border: none;
+  font: inherit; 
+  background-color: #fff;
+  color: currentColor;
+  width: 15px;
+  height: 15px;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.centerListItems label {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.centerListItems {
+  display: flex;
+  align-items: center;
+}
+
+.centerListItems input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var
+  (--form-control-color);
+  background-color: CanvasText;
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.centerListItems input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.centerListItems 
+input[type="checkbox"]:hover + label {
+  font-weight: bold;
+  transform: scale(1.2); 
+  transition: transform 0.3s ease; 
+}
+
+
+.formControlDisabled {
+  cursor: not-allowed;
+}
+
+.newListItem{
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newListItem input{
+  font-size: 15px;
+  margin-bottom: 5px;
+  width: 16rem;
+}
+
+.listsContainer{
+  width: -webkit-fill-available;
+}

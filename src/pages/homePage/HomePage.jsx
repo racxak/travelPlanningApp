@@ -11,9 +11,9 @@ const HomePage = () => {
         <Navbar buttons={homeButtons} />
         <div className={styles.home}>
         <Link className={styles.fillAll} to="/logowanie" >
-             <p className={styles.textFocusIn}>Rozpocznijmy przygodę</p>
-         
+             <p className={styles.textFocusIn}>Rozpocznij przygodę</p>
         </Link>
+        
         </div>
   </div>
   )

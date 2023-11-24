@@ -10,6 +10,7 @@ import TravelersJournal from "./pages/TravelersJournal";
 import { AuthContext } from "./context/AuthContext";
 import { travelInputs } from "./components/journalSource";
 import { journalNotesInputs } from "./components/journalSource";
+
 import { journalInputs } from "./components/journalSource";
 import TravelPage from "./pages/TravelPage";
 
@@ -50,6 +51,7 @@ const RequireAuth = ({ children }) => {
 				</RequireAuth>
 			),
 		},
+	
 	]);
 	
 	return (

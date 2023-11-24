@@ -7,9 +7,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-  /* background:url(https://photo-cdn2.icons8.com/D_U5t1J9lZGP4-Bj8uVpALHwAtcjyyfWf1ZCXQfvmOw/rs:fit:1901:1072/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5l/eHRlcm5hbC9hMmE0/Mi9iYjIzOWUzNzll/MGY0OTBjOWIyZTY3/ZmEwNTJjN2RiNC5q/cGc.jpg);  */
-  /* background-color: #302c2c; */
 }
 
 h1{
@@ -19,6 +16,7 @@ h1{
 .loginForm, .registerForm{
   display: flex;
   flex-direction: column;
+  margin-top: 3rem;
 }  
 
  @media screen and (min-width: 400px) { 
@@ -29,7 +27,7 @@ h1{
     border: 1px solid;
     border-radius: 10px;
     border-color: white;
-    margin: 0rem;
+   
   }  
  } 
 
@@ -40,6 +38,14 @@ h1{
   background-color: transparent;
 }
 
-.password{ 
- margin-bottom: 2rem;
+.success{
+  margin-top: 1rem;
+  max-width: 17rem;
+  font-size: 15px;
+  color: rgb(66, 145, 45);
+}
+
+.loginAndRegisterBtnWidth
+{
+  min-width: 17rem;
 }

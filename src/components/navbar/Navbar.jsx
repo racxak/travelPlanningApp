@@ -4,7 +4,6 @@ import {
 	AiOutlineMenu,
 	AiOutlineClose,
 } from "react-icons/ai";
-import Logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 
 export function Navbar({buttons}) {
@@ -14,7 +13,6 @@ export function Navbar({buttons}) {
 	return (
 		<header className={`${styles.navbar} container`}>
 				<p className={styles.logo}>TRAVELSTORY</p>
-				{/* <img src={Logo} alt="logo image" width="50" height="50" /> */}
 				<nav>
 					<ul
 						className={
@@ -23,7 +21,7 @@ export function Navbar({buttons}) {
 					>
 					{buttons && buttons.map((button, index) => (
 													<li key={index}>
-															<Link to={button.path}>
+															 <Link to={button.path} className={button.label ? `${styles.textLink}` : ''}>
 																	{button.label ? button.label : button.UserComponent}
 															</Link>
 													</li>

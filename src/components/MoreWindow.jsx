@@ -3,7 +3,7 @@ import styles from "./MoreWindow.module.css";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
-const MoreWindow = ({setEditingToFalse, isOpen, id, notes, setNotes, note,collectionPath, children, isEditing, setIsEditing}) => {
+const MoreWindow = ({isOpen, setIsOpen, id, notes, setNotes,collectionPath,  setIsEditing}) => {
  
 const handleDelete = async () => {
     try {
@@ -16,6 +16,7 @@ const handleDelete = async () => {
 
   const handleEdit = () => {
     setIsEditing(true);
+    setIsOpen(null);
   };
 
   if (!isOpen) return null;

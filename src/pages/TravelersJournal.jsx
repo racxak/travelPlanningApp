@@ -4,10 +4,11 @@ import AuthUser from "../components/auth/AuthUser";
 import {
 	collection,
 	addDoc,
-	getDocs,
 	query,
 	where,
 	onSnapshot,
+	doc,
+	updateDoc
 } from "firebase/firestore";
 import { db } from "../firebase";
 import styles from "./Pages.module.css";
@@ -26,6 +27,11 @@ const TravelersJournal = ({ inputs, title }) => {
 		note: "",
 	});
 
+	const [editingNoteId, setEditingNoteId] = useState(null);
+	const [editedNoteTitle, setEditedNoteTitle] = useState("");
+	const [editedNoteDate, setEditedNoteDate] = useState("");
+	const [editedNoteContent, setEditedNoteContent] = useState("");
+
 	const [inputErrors, setInputErrors] = useState({});
 	const { currentUser } = useContext(AuthContext);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -36,6 +42,38 @@ const TravelersJournal = ({ inputs, title }) => {
 		{ label: "Dziennik", path: "/dziennik" },
 		{ UserComponent: <AuthUser />, path: "#" },
 	];
+
+	const handleEdit = (note) => { 
+    setEditingNoteId(note.id);
+    setEditedNoteTitle(note.title);
+    setEditedNoteDate(note.date);
+    setEditedNoteContent(note.note);
+};
+
+const saveChanges = async (id) => {
+	try {
+			const noteDocRef = doc(db, "journalNotes", editingNoteId);
+			await updateDoc(noteDocRef, {
+					title: editedNoteTitle,
+					date: editedNoteDate,
+			});
+
+			setNotes(prevNotes =>
+					prevNotes.map(note =>
+							note.id === editingNoteId
+									? { ...note, title: editedNoteTitle, date: editedNoteDate, note: editedNoteContent }
+									: note
+					)
+			);
+			setEditingNoteId(null);
+			setEditedNoteTitle("");
+			setEditedNoteDate("");
+			setEditedNoteContent("");
+
+	} catch (error) {
+			console.log(error);
+	}
+};
 
 	const closePopup = () => {
 		setIsPopupOpen(false);
@@ -73,7 +111,6 @@ const TravelersJournal = ({ inputs, title }) => {
 	const handleAdd = async (e) => {
 		e.preventDefault();
 
-		// Weryfikuj, czy wszystkie pola są wypełnione
 		let hasEmptyFields = false;
 		let errors = {};
 		inputs.forEach((input) => {
@@ -85,9 +122,9 @@ const TravelersJournal = ({ inputs, title }) => {
 
 		if (hasEmptyFields) {
 			setInputErrors(errors);
-			return; // Nie dodawaj do bazy, jeśli są błędy
+			return; 
 		} else {
-			setInputErrors({}); // Wyczyść błędy
+			setInputErrors({}); 
 		}
 
 		try {
@@ -95,7 +132,6 @@ const TravelersJournal = ({ inputs, title }) => {
 				...formData,
 				userUid: currentUser.uid,
 			});
-			// fetchData();
 			closePopup();
 		} catch (err) {
 			console.log(err);
@@ -111,6 +147,7 @@ const TravelersJournal = ({ inputs, title }) => {
 	return (
 		<div>
 			<Navbar buttons={travelersJournalButtons}></Navbar>
+			<div className={styles.pageContainer}>
 
 			<div className={styles.addNew}>
 				<label> Dodaj nowy wpis</label>
@@ -125,7 +162,6 @@ const TravelersJournal = ({ inputs, title }) => {
 						{inputs.map((input) =>
 							input.id === "note" ? (
 								<div key={input.id}>
-									{/* <label>{input.label}</label> */}
 									<textarea
 										id={input.id}
 										placeholder={input.placeholder}
@@ -155,8 +191,8 @@ const TravelersJournal = ({ inputs, title }) => {
 											inputErrors[input.id] ? styles.errorInput : ""
 										} ${
 											input.id === "title"
-												? styles.inputTitle:
-												  styles.inputNotes
+												? styles.inputTitle
+												: styles.inputNotes
 										}`}
 										onChange={handleInput}
 										value={formData[input.id] || ""}
@@ -186,6 +222,7 @@ const TravelersJournal = ({ inputs, title }) => {
 				{Array.isArray(notes) &&
 					notes.map((note) => (
 						<div key={note.id} className={styles.notes}>
+										  {editingNoteId !== note.id && (
 							<button
 								className={
 									openMoreId === note.id ? styles.moreBtnBlock : styles.moreBtn
@@ -198,24 +235,62 @@ const TravelersJournal = ({ inputs, title }) => {
 							>
 								<AiOutlineMore />
 							</button>
+								)}
 							{openMoreId === note.id && (
 								<MoreWindow
 									isOpen={openMoreId}
+									setIsOpen={setOpenMoreId}
 									id={note.id}
 									notes={notes}
 									setNotes={setNotes}
 									note={note}
-								  collectionPath={"journalNotes"}
+									collectionPath={"journalNotes"}
+									isEditing={editingNoteId === note.id}
+									setIsEditing={(isEditing) => {
+										handleEdit(note);
+									}}
 								/>
 							)}
+							 {editingNoteId === note.id ? (
+            <div>
+							<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
+                <input
+								type="text"
+								className={styles.reset}
+                    value={editedNoteTitle}
+                    onChange={(e) => setEditedNoteTitle(e.target.value)}
+                />
+								</h2>
+								<span className={styles.editSpan}>
+                <input
+								type="date"
+									  className={styles.reset}
+                    value={editedNoteDate}
+                    onChange={(e) => setEditedNoteDate(e.target.value)}
+                />
+								<input
+								type="textarea"
+									  className={styles.reset}
+                    value={editedNoteContent}
+                    onChange={(e) => setEditedNoteContent(e.target.value)}
+                />
+                <button onClick={saveChanges}
+								className={styles.btn}>Zapisz</button>
+								</span>
+            </div>
+        ) : (
+					<div>
 							<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
 								{note.title}
 							</h2>
 							<span>{note.date}</span>
 							<p className={styles.noteContent}>{note.note}</p>
+					</div>
+				)}
 						</div>
 					))}
 			</div>
+		</div>
 		</div>
 	);
 };

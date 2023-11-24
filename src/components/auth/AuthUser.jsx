@@ -24,6 +24,7 @@ const AuthUser = () => {
 		};
 	}, []);
 
+	
 	const userSignOut = () => {
 		signOut(auth)
 			.then(() => {

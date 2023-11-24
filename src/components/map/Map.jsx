@@ -180,7 +180,7 @@ const Map = () => {
 							}}
 						>
 							<Popup className="popup">
-								{/* todo: po zamknięciu poprup pinezka ma znikać */}
+								{/* todo: po zamknięciu popup pinezka ma znikać */}
 								{openPopupMarkerId === marker.id ? (
 									<div>
 										<input
