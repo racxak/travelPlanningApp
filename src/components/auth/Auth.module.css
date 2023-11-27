@@ -9,6 +9,18 @@
   justify-content: center;
 }
 
+
+.or {
+  color: rgb(191, 191, 191);
+  font-size: 15px;
+  padding: 1rem 0;
+  
+}
+.icon{
+  width: 28px;
+  margin-right: 8px;
+}
+
 h1{
   margin-bottom: 2rem;
 }
@@ -48,4 +60,7 @@ h1{
 .loginAndRegisterBtnWidth
 {
   min-width: 17rem;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
 }
