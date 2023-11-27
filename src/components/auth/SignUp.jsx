@@ -10,8 +10,8 @@ const SignUp = (props) => {
 	const [password, setPassword] = useState("");
 	const [success, setSucces] = useState("");
 	const [errors, setErrors] = useState({});
-	const navigate = useNavigate();
 
+	
 	const signUp = (e) => {
 		e.preventDefault();
 
@@ -81,7 +81,7 @@ const SignUp = (props) => {
 				)}
 
 				<div style={{ height: "3rem" }}></div>
-
+			
 				<button
 					className={`${styles1.btn} ${styles.loginAndRegisterBtnWidth}`}
 					type="submit"

@@ -16,8 +16,6 @@ body{
   text-align: center;
   align-items: center;
   justify-content: center;
-  /* position: relative; */
-  /* background:url(https://photo-cdn2.icons8.com/D_U5t1J9lZGP4-Bj8uVpALHwAtcjyyfWf1ZCXQfvmOw/rs:fit:1901:1072/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5l/eHRlcm5hbC9hMmE0/Mi9iYjIzOWUzNzll/MGY0OTBjOWIyZTY3/ZmEwNTJjN2RiNC5q/cGc.jpg);  */
   background-color:var(--background-color);
 }
 

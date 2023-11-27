@@ -28,9 +28,11 @@ export function Navbar({buttons}) {
 											))}
 					</ul>
 				</nav>
+				{buttons && buttons.length > 0 &&
 				<div onClick={() => setNav(!nav)} className={styles.mobile_btn}>
 					{nav ? <AiOutlineClose className ={styles.navBtn} size={25} /> : <AiOutlineMenu  className ={styles.navBtn} size={25} />}
-				</div>
+				</div> 
+}
 		</header>
 	);
 }
