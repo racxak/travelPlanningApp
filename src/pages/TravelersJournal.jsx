@@ -18,6 +18,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import AddNote from "../components/AddNote";
 import { AiOutlineClose, AiOutlineMore } from "react-icons/ai";
 import MoreWindow from "../components/MoreWindow";
+import EmptyPage from "../components/emptyPage/EmptyPage";
 
 const TravelersJournal = ({ inputs, title }) => {
 	const [notes, setNotes] = useState([]);
@@ -213,7 +214,7 @@ const saveChanges = async (id) => {
 					</form>
 				</div>
 			</AddNote>
-
+			{notes.length >0 ? 
 			<div
 				className={`${styles.scroller} ${
 					isPopupOpen ? styles.scrollerShrinked : ""
@@ -290,6 +291,9 @@ const saveChanges = async (id) => {
 						</div>
 					))}
 			</div>
+			:
+			<EmptyPage/>
+				}
 		</div>
 		</div>
 	);

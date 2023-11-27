@@ -19,6 +19,7 @@ import AddNote from "../components/AddNote";
 import {AiOutlineMore } from "react-icons/ai";
 import MoreWindow from "../components/MoreWindow";
 import { useNavigate } from "react-router-dom";
+import EmptyPage from "../components/emptyPage/EmptyPage";
 
 
 const AllTravelsPage = ({ inputs }) => {
@@ -198,7 +199,8 @@ const saveChanges = async (id) => {
 					</form>
 				</div>
 			</AddNote>
-
+			
+			{notes.length >0 ? 
 			<div
 				className={`${styles.scroller} ${
 					isPopupOpen ? styles.scrollerShrinked : ""
@@ -270,6 +272,9 @@ const saveChanges = async (id) => {
 						</div>
 					))}
 			</div>
+			:
+			<EmptyPage/> 
+}
 		</div>
 		</div>
 	);
