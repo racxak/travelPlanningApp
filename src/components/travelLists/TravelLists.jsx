@@ -21,6 +21,7 @@ import AddNote from "../AddNote";
 import { AiOutlineMore } from "react-icons/ai";
 import MoreWindow from "../MoreWindow";
 import { useParams } from "react-router-dom";
+import EmptyPage from "../emptyPage/EmptyPage";
 
 const TravelLists = () => {
 	const [userLists, setUserLists] = useState([]);
@@ -421,9 +422,11 @@ const TravelLists = () => {
 		<div className={styles.listsContainer}>
 			<h2 className={styles.yoursListLabel}>Twoje listy </h2>
 			<label> Dodaj nowy wpis</label>
+	
 			<button className={styles1.plusBtn} onClick={() => setIsPopupOpen(true)}>
 				<AiOutlinePlus></AiOutlinePlus>
 			</button>
+			{userLists.length===0 && isPopupOpen===false&& <EmptyPage id="lists"/>}
 
 			<div className={styles.pin_container}>
 				<AddNote isOpen={isPopupOpen} closePopup={closePopup} isList={true}>
@@ -592,7 +595,6 @@ const TravelLists = () => {
 									{list.items &&
 										list.items.map((item) => (
 											<ListItem key={item.id} item={item} listId={list.id} />
-											// todo: edycja listy
 										))}
 								</>
 							)}
@@ -604,5 +606,3 @@ const TravelLists = () => {
 };
 
 export default TravelLists;
-
-// todo : zabepiecznie po edicie co do pustego tekstu

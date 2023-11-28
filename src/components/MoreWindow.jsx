@@ -24,7 +24,7 @@ const handleDelete = async () => {
   return (
     <div className={styles.moreWindow}>
       <>
-          <button onClick={handleEdit} className={styles.styleBtn}>
+          <button id= "edit" onClick={handleEdit} className={styles.styleBtn}>
             Edytuj
           </button>
           <button onClick={handleDelete} className={`${styles.styleBtn} ${styles.delete}`}>

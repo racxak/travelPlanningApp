@@ -296,7 +296,6 @@ button{
   border-radius: 5px;
 }
 
-/* Sam pasek przewijania */
 ::-webkit-scrollbar-thumb {
   background-color: #888;
   border-radius: 5px;
@@ -308,7 +307,7 @@ button{
 
 .noteContent {
   word-wrap: break-word;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   white-space: normal;
   max-height: 200px; 
   overflow-y: auto;  
@@ -322,16 +321,18 @@ button{
 }
 
 .travelTitleLabel{
-  margin-top: 7rem;
-  margin-left: 2rem;
+  margin-top: 10vh;
+  margin-left: 2vw;
   text-align: left;
+  margin-bottom: 1vw;
+  animation: fadeIn 1s ease-out;
 }
 
 .mapAndNotesContainer{
   width: 98%;
   display: flex;
   flex-direction: row;
-  height: 74vh;
+  height: 78vh;
   margin-right: 1rem;
   margin-left: 1rem;
 }
@@ -344,6 +345,7 @@ button{
   .savedLoc{
     margin-top: 3rem;
   }
+
   .markersListItem{
     position: relative;
     padding: 2vh 3vw ;
@@ -367,13 +369,14 @@ button{
 }
 .markersList{
  padding-top: 0.3rem;
- max-height:  88%;
+ max-height:  64vh;
  overflow-y: auto;
  padding-bottom: 0.3rem;
 }
 .searchBar{
   height: 2rem;
 }
+
 
 .markersListItem{
   position: relative;
@@ -425,16 +428,16 @@ button{
 
 .allToDoListsContainer{
   width: -webkit-fill-available;
-  margin-top: 5rem;
+  margin-top: 5vh;
 }
 .mouseImage {
-  width: 50px; /* Adjust the size as needed */
+  width: 50px; 
   height: auto;
   animation: clickAnimation 1s infinite;
 }
 
 @keyframes clickAnimation {
   0% { transform: scale(1); }
-  50% { transform: scale(0.9); } /* This creates a 'click' effect */
+  50% { transform: scale(0.9); } 
   100% { transform: scale(1); }
 }

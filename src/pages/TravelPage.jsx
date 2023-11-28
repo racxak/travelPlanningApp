@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { journalNotesInputs } from "../components/journalSource";
 import TravelLists from "../components/travelLists/TravelLists";
+import EmptyPage from "../components/emptyPage/EmptyPage";
 
 const travelButtons = [
 	{ label: "Podróże", path: "/twoje-podroze" },
@@ -110,9 +111,10 @@ const TravelPage = () => {
 						onChange={(e) => setSearchTerm(e.target.value)}
 						className={styles.searchBar}
 					/>
-
-					<div className={styles.markersList}>
-						{filteredMarkers.map((marker) => (
+          
+					
+					<div className={styles.markersList}>	
+						{filteredMarkers.length>0 ? filteredMarkers.map((marker) => (
 							<div className={styles.markersListItem} key={marker.id}>
 								{editingMarkerId !== marker.id && (
 								<button
@@ -186,7 +188,9 @@ const TravelPage = () => {
 									</>
 								)}
 							</div>
-						))}
+						)
+						): 
+						<EmptyPage id="markers"/>}
 					</div>
 				</div>
 			</div>

@@ -1,27 +1,27 @@
 @import '../colors.css';
  
-
 .styleBtn{
   background-color: transparent;
   color: white;
     width: 100%;
-    margin: 0.5rem 0;
     border: none;
     border-radius: 0px;
     padding: 0rem;
     font-size: 12px;
+    margin-top: 5px;
 }
 
 .moreWindow{
   position: absolute;
+  height: 6vh;
   background-color: var(--background-color);
     right: 20px; 
     top: 50px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     border: 1px solid;
     border-radius: 10px;
     width: 50px; 
@@ -30,8 +30,3 @@
 .delete{
   color: var(--error-color);
 }
-/* 
-.textareaEdit{
-  background-color: var(--background-color);
-  color: white;
-} */

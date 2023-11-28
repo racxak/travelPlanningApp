@@ -8,6 +8,7 @@
 }
 .yoursListLabel {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-left: 2rem;
   text-align: left;
 }
@@ -24,17 +25,47 @@
   color: gray;
 }
 
-@media (max-width: 768px) {
+
+
+
+@media  (max-width: 700px) {
   .pin_container {
     align-self: center;
     width: auto;
     position: relative;
-    display: column;
-    justify-content: center; 
-    grid-gap: 0;
-  }  
 
- 
+  -moz-column-count: 1 !important;
+  -moz-column-gap: 10px;
+  -webkit-column-count: 1 !important;
+  -webkit-column-gap: 10px;
+  column-count: 1 !important;
+  column-gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+}
+
+
+@media  (min-width: 700px) and (max-width: 1000px) {
+  .pin_container {
+    align-self: center;
+    width: auto;
+    position: relative;
+
+  -moz-column-count: 2 !important;
+  -moz-column-gap: 10px;
+  -webkit-column-count: 2 !important;
+  -webkit-column-gap: 10px;
+  column-count: 2 !important;
+  column-gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+}
+
+@media (max-width: 768px) {
   .card {
     width: auto;
     position: relative;
@@ -82,7 +113,6 @@
   background-color: transparent;
   border-radius: unset;
   width: 100%;
-
 }
 
 .addNew{
@@ -168,6 +198,7 @@
 .centerListItems {
   display: flex;
   align-items: center;
+  overflow-wrap: anywhere;
 }
 
 .centerListItems input[type="checkbox"]::before {
@@ -214,4 +245,5 @@ input[type="checkbox"]:hover + label {
 
 .listsContainer{
   width: -webkit-fill-available;
+  left: 50%;
 }
