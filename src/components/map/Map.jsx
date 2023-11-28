@@ -20,6 +20,9 @@ import "leaflet.locatecontrol";
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 import L from "leaflet";
 import styles from "../../pages/Pages.module.css";
+import Search from "./Search";
+import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch'
+
 
 function LocateControl({ isLocationAddedRef }) {
 	const map = useMap();
@@ -220,7 +223,8 @@ const Map = () => {
 				</MarkerClusterGroup>
 				<ScaleControl />
 				<LocateControl isLocationAddedRef={isLocationAddedRef} />
-			</MapContainer>
+				<Search provider={new OpenStreetMapProvider()}/>
+								</MapContainer>
 		</div>
 	);
 };

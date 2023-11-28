@@ -1,3 +1,4 @@
+
 .leaflet-container {
   height: 78vh; 
   width: 50vw;
@@ -66,3 +67,25 @@
 .geosearch-button {
   background-color: black;
 }
+
+/*  */
+.leaflet-control-geosearch input {
+  background-color: #f9f9f9;
+  color:#333
+}
+.leaflet-control-geosearch button {
+  margin-right: 5px;
+  font-size: 20px;
+  background-color:transparent;
+}
+.leaflet-control-geosearch .results > * {
+  font-weight:bolder;
+  color: #333;
+    backdrop-filter: blur(1px);
+}
+.leaflet-control-geosearch{
+  max-width: 40vw;
+}
+
+
+
