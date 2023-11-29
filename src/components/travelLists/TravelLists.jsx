@@ -13,6 +13,7 @@ import {
 import { db } from "../../firebase";
 import styles from "./TravelLists.module.css";
 import styles1 from "../../pages/Pages.module.css";
+import Spinner from "../spinner/Spinner";
 
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
@@ -25,6 +26,7 @@ import EmptyPage from "../emptyPage/EmptyPage";
 
 const TravelLists = () => {
 	const [userLists, setUserLists] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const [formData, setFormData] = useState({
 		title: "",
 	});
@@ -294,6 +296,7 @@ const TravelLists = () => {
 					lists.push(list);
 				});
 				setUserLists(lists);
+				setLoading(false); 
 			});
 
 			return () => {
@@ -426,7 +429,8 @@ const TravelLists = () => {
 			<button className={styles1.plusBtn} onClick={() => setIsPopupOpen(true)}>
 				<AiOutlinePlus></AiOutlinePlus>
 			</button>
-			{userLists.length===0 && isPopupOpen===false&& <EmptyPage id="lists"/>}
+			{userLists.length===0 && isPopupOpen===false&& loading===false && <EmptyPage id="lists"/>}
+			{isPopupOpen===false&& loading===true && <Spinner id="lists"/>}
 
 			<div className={styles.pin_container}>
 				<AddNote isOpen={isPopupOpen} closePopup={closePopup} isList={true}>

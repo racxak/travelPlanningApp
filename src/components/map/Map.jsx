@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect,mapRef } from "react";
 import {
-	MapContainer,
+	MapContainer as Mappppp,
 	Marker,
 	TileLayer,
 	Popup,
@@ -21,7 +21,7 @@ import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 import L from "leaflet";
 import styles from "../../pages/Pages.module.css";
 import Search from "./Search";
-import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch'
+import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
 
 function LocateControl({ isLocationAddedRef }) {
 	const map = useMap();
@@ -36,7 +36,7 @@ function LocateControl({ isLocationAddedRef }) {
 	return null;
 }
 
-const Map = () => {
+const MyMap = () => {
 	const { travelId } = useParams();
 	const ZOOM_LEVEL = 13;
 	const [userMarkers, setUserMarkers] = useState([]);
@@ -58,8 +58,8 @@ const Map = () => {
 	const customIcon = new Icon({
 		iconUrl: require("../../images/location-pin.png"),
 		iconSize: [38, 38],
-		iconAnchor: [18, 42], 
-		popupAnchor: [1.8, -38], 
+		iconAnchor: [18, 42],
+		popupAnchor: [1.8, -38],
 	});
 
 	const createClusterCustomIcon = function (cluster) {
@@ -154,7 +154,7 @@ const Map = () => {
 
 	return (
 		<div>
-			<MapContainer
+			<Mappppp
 				center={[51.107134757977626, 17.016574168441714]}
 				zoom={ZOOM_LEVEL}
 			>
@@ -184,7 +184,6 @@ const Map = () => {
 							}}
 						>
 							<Popup className="popup">
-								{/* todo: po zamknięciu popup pinezka ma znikać */}
 								{openPopupMarkerId === marker.id ? (
 									<div>
 										<input
@@ -224,10 +223,13 @@ const Map = () => {
 				</MarkerClusterGroup>
 				<ScaleControl />
 				<LocateControl isLocationAddedRef={isLocationAddedRef} />
-				<Search provider={new OpenStreetMapProvider()} handleMapClick={handleMapClick}/>
-								</MapContainer>
+				<Search
+					provider={new OpenStreetMapProvider()}
+					handleMapClick={handleMapClick}
+				/>
+			</Mappppp>
 		</div>
 	);
 };
 
-export default Map;
+export default MyMap;

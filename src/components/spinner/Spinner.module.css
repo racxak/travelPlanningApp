@@ -1,0 +1,47 @@
+.spinner {
+	align-self: center;
+	border: 4px dotted rgba(255, 252, 252, 0.1);
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	animation: spin 2s linear infinite;
+}
+
+.markers {
+	position: relative;
+	top: 16rem;
+	left: 23vw;
+}
+
+@media (max-width: 768px) {
+	.markers {
+		left: 42vw;
+	}
+}
+
+.lists {
+	position: relative;
+	top: 16rem;
+	left: 48vw;
+}
+
+.img {
+	display: inline;
+	animation: unset;
+	width: 35px;
+	margin-left: 39px;
+	rotate: 70deg;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

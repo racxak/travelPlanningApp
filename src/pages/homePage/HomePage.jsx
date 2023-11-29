@@ -3,10 +3,11 @@ import styles from "./Home.module.css";
 import { Link, useActionData } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import styles1 from "../Pages.module.css";
-
+import Spinner from '../../components/spinner/Spinner';
 
 const HomePage = () => {
 	const homeButtons = [];
+	const [loading, setLoading] = useState(true);
 	const texts = [
 		"Proste planowanie podróży",
 		"Prowadzenie dziennika podróży",
@@ -27,12 +28,17 @@ const nextText = () => {
 
 
 useEffect(() => {
-   
+	// setTimeout(() => {
+		setLoading(false);
+// }, 1500);
 	setTimeout(() => { nextText() }, 6000);
 }
 )
 
 
+	if (loading) {
+		return <Spinner />;
+	}
 	return (
 		<div>
 			<Navbar buttons={homeButtons} />

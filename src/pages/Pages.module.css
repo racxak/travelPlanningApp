@@ -369,7 +369,7 @@ button{
 }
 .markersList{
  padding-top: 0.3rem;
- max-height:  64vh;
+ height:  64vh;
  overflow-y: auto;
  padding-bottom: 0.3rem;
 }

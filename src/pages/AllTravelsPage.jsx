@@ -20,11 +20,14 @@ import {AiOutlineMore } from "react-icons/ai";
 import MoreWindow from "../components/MoreWindow";
 import { useNavigate } from "react-router-dom";
 import EmptyPage from "../components/emptyPage/EmptyPage";
+import Spinner from "../components/spinner/Spinner";
 
 
 const AllTravelsPage = ({ inputs }) => {
 	const navigate = useNavigate();
+	const [loading, setLoading] = useState(true);
 	const [notes, setNotes] = useState([]);
+
 	const [formData, setFormData] = useState({
 		title: "",
 		date: "",
@@ -95,12 +98,12 @@ const saveChanges = async (id) => {
 					list.push({ id: doc.id, ...doc.data() });
 				});
 				setNotes(list);
+				setLoading(false);
 			},
 			(error) => {
 				console.log(error);
 			}
 		);
-
 		return () => {
 			unsub();
 		};
@@ -199,8 +202,10 @@ const saveChanges = async (id) => {
 					</form>
 				</div>
 			</AddNote>
-			
-			{notes.length >0 ? 
+
+			{notes.length===0 && isPopupOpen===false&& loading===false && <EmptyPage/>}
+			{isPopupOpen===false && loading===true && <Spinner/>}
+		
 			<div
 				className={`${styles.scroller} ${
 					isPopupOpen ? styles.scrollerShrinked : ""
@@ -272,9 +277,6 @@ const saveChanges = async (id) => {
 						</div>
 					))}
 			</div>
-			:
-			<EmptyPage/> 
-}
 		</div>
 		</div>
 	);

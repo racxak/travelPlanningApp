@@ -19,21 +19,22 @@
 }
 
 .lists {
-  top: 6rem;
+  top: 15rem;
   position: relative;
   margin-right: 5rem;
 }
 
 @media (max-width: 768px){
   .markers {
-    top: 6rem;
+    top: 15rem;
     position: relative;
     margin-right: 5rem;
   } 
   .lists {
-    top: 6rem;
+    top: 15rem;
     position: relative;
     margin-right: 5rem;
+    margin-bottom: 40vh;
   } 
 }
 
