@@ -23,7 +23,6 @@ import styles from "../../pages/Pages.module.css";
 import Search from "./Search";
 import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch'
 
-
 function LocateControl({ isLocationAddedRef }) {
 	const map = useMap();
 
@@ -59,6 +58,8 @@ const Map = () => {
 	const customIcon = new Icon({
 		iconUrl: require("../../images/location-pin.png"),
 		iconSize: [38, 38],
+		iconAnchor: [18, 42], 
+		popupAnchor: [1.8, -38], 
 	});
 
 	const createClusterCustomIcon = function (cluster) {
@@ -85,7 +86,7 @@ const Map = () => {
 	};
 
 	const handleMapClick = (e) => {
-		const newLat = e.latlng.lat + 0.00008;
+		const newLat = e.latlng.lat;
 		const newLng = e.latlng.lng;
 
 		const newMarker = {
@@ -223,7 +224,7 @@ const Map = () => {
 				</MarkerClusterGroup>
 				<ScaleControl />
 				<LocateControl isLocationAddedRef={isLocationAddedRef} />
-				<Search provider={new OpenStreetMapProvider()}/>
+				<Search provider={new OpenStreetMapProvider()} handleMapClick={handleMapClick}/>
 								</MapContainer>
 		</div>
 	);

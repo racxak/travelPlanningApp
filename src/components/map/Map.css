@@ -70,7 +70,7 @@
 
 /*  */
 .leaflet-control-geosearch input {
-  background-color: #f9f9f9;
+  background: transparent;
   color:#333
 }
 .leaflet-control-geosearch button {
@@ -81,8 +81,8 @@
 .leaflet-control-geosearch .results > * {
   font-weight:bolder;
   color: #333;
-    backdrop-filter: blur(1px);
 }
+
 .leaflet-control-geosearch{
   max-width: 40vw;
 }

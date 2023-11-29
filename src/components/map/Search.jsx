@@ -15,10 +15,10 @@ const Search = (props) => {
     const customIcon = new L.Icon({
       iconUrl: locationPinIcon,
       iconSize: [38, 38], 
-      iconAnchor: [12, 41], 
-      popupAnchor: [7, -36], 
+  		iconAnchor: [18, 42], 
+  		popupAnchor: [1.8, -38], 
     });
-
+    
     const searchControl = new GeoSearchControl({
       provider,
       showMarker: true, 
@@ -30,7 +30,34 @@ const Search = (props) => {
 
     map.addControl(searchControl);
 
-    return () => map.removeControl(searchControl);
+    map.on('geosearch/showlocation', (e) => {
+      const handleAddToJourneyClick = () => {
+        const fakeEvent = { latlng: L.latLng(e.location.y, e.location.x) };
+        props.handleMapClick(fakeEvent); 
+      };
+    
+      const popupContent = L.DomUtil.create('div');
+
+      const addP = L.DomUtil.create('p', '', popupContent);
+      addP.innerText = `${e.location.label}`;
+
+      const addButton = L.DomUtil.create('button', '', popupContent);
+      addButton.style.backgroundColor = 'transparent';
+      addButton.style.color = '#2596be';
+      addButton.innerText = 'Dodaj do podróży';
+
+
+      L.DomEvent.on(addButton, 'click', handleAddToJourneyClick);
+    
+      e.marker.bindPopup(popupContent).openPopup();
+
+  });
+
+  return () => {
+    map.removeControl(searchControl);
+    map.off('geosearch/showlocation');
+    delete window.handleAddToJourneyClick;
+  };
   }, [props]);
 
   return null;
