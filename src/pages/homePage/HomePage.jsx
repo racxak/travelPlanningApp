@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
-import { Link, useActionData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
-import styles1 from "../Pages.module.css";
-import Spinner from '../../components/spinner/Spinner';
 
 const HomePage = () => {
 	const homeButtons = [];
@@ -28,21 +26,19 @@ const nextText = () => {
 
 
 useEffect(() => {
-	// setTimeout(() => {
-		setLoading(false);
-// }, 1500);
-	setTimeout(() => { nextText() }, 6000);
+    const highResImage = new Image();
+    highResImage.src =  'https://coolwallpapers.me/picsup/5227656-lake-mountain-boat-cloud-landscape-dolomite-wooden-wildsee-water-tyrol-turquoise-trentino-tree-travel-tranquil-tourism-summer-sudtirol-sky-ship-public-domain-images.jpg'; 
+
+    highResImage.onload = () => {
+        document.getElementById('backgroundContainer').style.backgroundImage = `url('${highResImage.src}')`;
+    
+};
 }
 )
-
-
-	if (loading) {
-		return <Spinner />;
-	}
 	return (
 		<div>
 			<Navbar buttons={homeButtons} />
-			<div className={styles.home}></div>
+			<div id= "backgroundContainer" className={styles.home}></div>
 
 			<div className={styles.wrapper}>
 				<div className={styles.typing}>Gotowy by rozpocząć podróż? </div>
