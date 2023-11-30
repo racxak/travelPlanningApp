@@ -41,7 +41,6 @@
 }
 
 .input-l{
-  
  width: 19rem;
   background-color: rgb(75, 70, 70);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
@@ -53,8 +52,8 @@
       padding: 1rem;
 }
 
-.leaflet-bar .geosearch { /* more specific selector */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important; /* override styles */
+.leaflet-bar .geosearch { 
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) !important; 
   border-radius: 100px !important;
 }
 
@@ -68,7 +67,6 @@
   background-color: black;
 }
 
-/*  */
 .leaflet-control-geosearch input {
   background: transparent;
   color:#333
@@ -88,4 +86,17 @@
 }
 
 
+.popup p[id="title"] {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.popup span[id="geocode"] {
+  font-size: 12px;
+  color: orange;
+}
+
+.popup p[id="note"] {
+  margin-top: 5px;
+}
 

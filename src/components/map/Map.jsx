@@ -210,11 +210,11 @@ const MyMap = () => {
 									</div>
 								) : (
 									<div>
-										<p>{marker.title}</p>
-										<span>
+										<p id="title">{marker.title}</p>
+										<span id="geocode">
 											{marker.geocode[0]}, {marker.geocode[1]}
 										</span>
-										<p>{marker.info}</p>
+										<p  id="note" >{marker.info}</p>
 									</div>
 								)}
 							</Popup>
