@@ -58,6 +58,7 @@ const TravelPage = () => {
 				setUserMarkers(markers);
 				setLoading(false); 
 			});
+			
 
 			const docRef = doc(db, "allJournals", travelId);
 			getDoc(docRef)
@@ -122,7 +123,7 @@ const TravelPage = () => {
 
 						<div className={styles.markersList}>
 
-						{filteredMarkers.length===0 && loading===false && <EmptyPage id="markers"/>}
+						{userMarkers.length===0 && loading===false && <EmptyPage id="markers"/>}
 						
 						{loading===true && <Spinner id="markers"/>}
 
