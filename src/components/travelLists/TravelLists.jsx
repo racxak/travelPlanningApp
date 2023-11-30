@@ -171,7 +171,7 @@ const TravelLists = () => {
 };
 
 
-	const ListItem = ({ listId, key, item }) => {
+	const ListItem = ({ listId, key, item}) => {
 		const [localTitle, setLocalTitle] = useState(item.title);
 		const handleLocalTitleChange = (e) => {
 			setLocalTitle(e.target.value);
@@ -273,6 +273,7 @@ const TravelLists = () => {
 		setIsAddingItem(false);
 		setInputErrors({});
 		setEditedListItems({});
+		setCurrentListItems([]);
 	};
 
 	useEffect(() => {

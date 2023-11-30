@@ -37,10 +37,9 @@ const TravelPage = () => {
 	const [editingMarkerId, setEditingMarkerId] = useState(null);
 	const [editedMarkerTitle, setEditedMarkerTitle] = useState("");
 	const [editedMarkerInfo, setEditedMarkerInfo] = useState("");
-  
 	const [loading, setLoading] = useState(true);
-
 	const [searchTerm, setSearchTerm] = useState("");
+
 	const filteredMarkers = userMarkers.filter((marker) =>
 		`${marker.title} ${marker.geocode[0]} ${marker.geocode[1]} ${marker.info}`
 			.toLowerCase()
@@ -112,6 +111,7 @@ const TravelPage = () => {
 					<MyMap/>
 					<div className={styles.locations}>
 						<h2 className={styles.savedLoc}>Zapisane lokalizacje</h2>
+						
 						<input
 							type="text"
 							placeholder="Znajdź swoje ulubione miejsca"

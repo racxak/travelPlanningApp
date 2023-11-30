@@ -99,7 +99,6 @@ const SignIn = (props) => {
 					onClick={handleGoogleAuth}
 					className={`${styles1.btn} ${styles.loginAndRegisterBtnWidth}`}
 				>
-					{" "}
 					<img className={styles.icon} src={googleIcon} alt="Ikona Google" />
 					Zaloguj przez Google
 				</button>

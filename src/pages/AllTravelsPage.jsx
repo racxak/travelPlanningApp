@@ -40,6 +40,7 @@ const AllTravelsPage = ({ inputs }) => {
 	const { currentUser } = useContext(AuthContext);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const [openMoreId, setOpenMoreId] = useState(null);
+	const [searchTerm, setSearchTerm] = useState("");
 
 	const allTravelsButtons = [
 		{ label: "Podróże", path: "/twoje-podroze" },
@@ -52,6 +53,10 @@ const AllTravelsPage = ({ inputs }) => {
     setEditedNoteTitle(note.title);
     setEditedNoteDate(note.date);
 };
+
+const filteredNotes = notes.filter(note =>
+	note.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
 const saveChanges = async (id) => {
 			try {
@@ -161,6 +166,15 @@ const saveChanges = async (id) => {
 					<AiOutlinePlus></AiOutlinePlus>
 				</button>
 			</div>
+			<div className={styles.search}>
+			<input
+  type="text"
+  placeholder="Wyszukaj..."
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  className={styles.searchBar}
+/>		
+			</div>
 
 			<AddNote isOpen={isPopupOpen} closePopup={closePopup}>
 				<div>
@@ -211,8 +225,8 @@ const saveChanges = async (id) => {
 					isPopupOpen ? styles.scrollerShrinked : ""
 				}`}
 			>
-				{Array.isArray(notes) &&
-					notes.map((note) => (
+				{Array.isArray(filteredNotes) &&
+					filteredNotes.map((note) => (
 						<div key={note.id} className={`${styles.notes} ${styles.travels}`}>
 							  {editingNoteId !== note.id && (
 							<button

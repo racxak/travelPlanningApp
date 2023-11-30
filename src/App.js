@@ -22,7 +22,6 @@ const RequireAuth = ({ children }) => {
 	return (currentUser ? children : <Navigate to="/logowanie"></Navigate>);
 };
 
-//ścieżki z a href - ładyjemy ponownie całą stronę :(
 	const router = createBrowserRouter([
 		{ path: "/", element: <HomePage /> },
 		{ path: "/o-nas", element: <AboutUsPage /> },

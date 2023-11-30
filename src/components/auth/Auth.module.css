@@ -59,8 +59,8 @@ h1{
 
 .loginAndRegisterBtnWidth
 {
-  min-width: 17rem;
+  align-items: center;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  justify-content: center;
+  min-width: 17rem; 
 }

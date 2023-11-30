@@ -13,7 +13,7 @@
 
 .moreWindow{
   position: absolute;
-  height: 6vh;
+  height: 4rem;
   background-color: var(--background-color);
     right: 20px; 
     top: 50px;
@@ -29,4 +29,5 @@
 
 .delete{
   color: var(--error-color);
+  margin-top: 10px;
 }

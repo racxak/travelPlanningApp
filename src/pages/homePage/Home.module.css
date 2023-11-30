@@ -2,7 +2,6 @@
 
 .home{
  background-image: url('../../images/home-page-background.jpg');
- /* background: url('https://coolwallpapers.me/picsup/5227656-lake-mountain-boat-cloud-landscape-dolomite-wooden-wildsee-water-tyrol-turquoise-trentino-tree-travel-tranquil-tourism-summer-sudtirol-sky-ship-public-domain-images.jpg') no-repeat, center/cover; */
  filter: brightness(50%);
  background-position: center;
  display: flex;
@@ -13,7 +12,6 @@
  flex-direction: column;
  align-items: center;
 }
-/* todo: ładowanie zdjecia */
 .sliderTexts{
   overflow: hidden;
   height: 16px;

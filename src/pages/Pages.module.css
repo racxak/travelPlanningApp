@@ -18,7 +18,14 @@ body{
   justify-content: center;
   background-color:var(--background-color);
 }
+.searchAndFilterContainer{
+  display: flex;
+  flex-direction: column;
+}
+.searchAndFilterContainer input{
+  background: transparent;
 
+}
 .editSpan{
   display: flex;
   flex-direction: column;
@@ -140,6 +147,15 @@ button{
   left: 30px;
  }
 
+ .search{
+  position: absolute;
+  top: 10vh; 
+  right: 1rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+ }
+
  .notes{
   max-width: 90vw;
   position: relative;
@@ -153,6 +169,7 @@ button{
   border-radius: 10px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
  }
+ 
 .addNoteMargin{
   position: relative;
   top:18vh;
@@ -236,22 +253,22 @@ button{
 
 
 .btn {
-  width: 130px;
-  height: 40px;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border-radius: 5px;
-  z-index: 0;
   background: #fff;
-  overflow: hidden;
-  border: 2px solid white;
-  color: white;
-  background-color: transparent;
+    background-color: initial;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    height: 40px;
+    outline: none;
+    overflow: hidden;
+    padding: 5px 10px;
+    position: relative;
+    transition: all .3s ease;
+    width: 130px;
+    z-index: 0;
 }
 .btn:hover {
   color: var(--background-color);
@@ -369,7 +386,7 @@ button{
 }
 .markersList{
  padding-top: 0.3rem;
- max-height:  64vh;
+ height:  64vh;
  overflow-y: auto;
  padding-bottom: 0.3rem;
 }

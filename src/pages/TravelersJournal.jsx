@@ -22,6 +22,7 @@ import EmptyPage from "../components/emptyPage/EmptyPage";
 import Spinner from "../components/spinner/Spinner";
 
 const TravelersJournal = ({ inputs, title }) => {
+	const [searchTerm, setSearchTerm] = useState("");
 	const [notes, setNotes] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [formData, setFormData] = useState({
@@ -88,7 +89,7 @@ const saveChanges = async (id) => {
 		setInputErrors({});
 	};
 
-	useEffect(() => {
+	useEffect(() => {		
 		const unsub = onSnapshot(
 			query(
 				collection(db, "journalNotes"),
@@ -110,7 +111,12 @@ const saveChanges = async (id) => {
 		return () => {
 			unsub();
 		};
-	}, []);
+  }, [notes]);
+
+	const filteredNotes = notes.filter(note =>
+		note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+		note.note.toLowerCase().includes(searchTerm.toLowerCase())
+	);
 
 	const handleAdd = async (e) => {
 		e.preventDefault();
@@ -141,7 +147,7 @@ const saveChanges = async (id) => {
 			console.log(err);
 		}
 	};
-
+	
 	const handleInput = (e) => {
 		const id = e.target.id;
 		const value = e.target.value;
@@ -157,9 +163,20 @@ const saveChanges = async (id) => {
 				<label> Dodaj nowy wpis</label>
 				<button className={styles.plusBtn} onClick={() => setIsPopupOpen(true)}>
 					<AiOutlinePlus></AiOutlinePlus>
-				</button>
+				</button>		
 			</div>
+			<div className={styles.search}>
+			<input
+  type="text"
+  placeholder="Wyszukaj..."
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  className={styles.searchBar}
+/>		
+			</div>
+		
 
+		
 			<AddNote isOpen={isPopupOpen} closePopup={closePopup}>
 				<div>
 					<form onSubmit={handleAdd}>
@@ -226,8 +243,8 @@ const saveChanges = async (id) => {
 					isPopupOpen ? styles.scrollerShrinked : ""
 				}`}
 			>
-				{Array.isArray(notes) &&
-					notes.map((note) => (
+				{Array.isArray(filteredNotes) &&
+					filteredNotes.map((note) => (
 						<div key={note.id} className={styles.notes}>
 										  {editingNoteId !== note.id && (
 							<button
