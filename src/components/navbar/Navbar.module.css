@@ -1,8 +1,8 @@
 .navbar {
 	position: fixed;
-  top: 0;
-  left: 0;
-	width: -webkit-fill-available;
+	top: 0;
+	left: 0;
+	width: calc(100vw - 2rem);
 	height: 7vh;
 	display: flex;
 	justify-content: space-between;
@@ -11,7 +11,7 @@
 	border: 1px solid;
 	margin: 1rem;
 	background-color: #ffffff;
-	z-index: 1000;
+	z-index: 10000;
 }
 
 .menu {
@@ -30,8 +30,8 @@
 	display: none;
 }
 .navbar li a.textLink:hover {
-  font-weight: bold; 
-  transition: font-weight 0.2s ease;
+	font-weight: bold;
+	transition: font-weight 0.2s ease;
 }
 
 @media screen and (max-width: 720px) {
@@ -53,14 +53,14 @@
 		bottom: 0;
 		top: 0;
 		width: 100%;
-		height: 100vh;
+		height: 100%;
 		background-color: #fff9f4;
 		z-index: 10;
 		transition: 1s;
 	}
 
-	.navBtn{
-		color: var(--background-color)
+	.navBtn {
+		color: var(--background-color);
 	}
 
 	.active {
@@ -71,37 +71,42 @@
 		font-size: 1.3rem;
 	}
 
-	.logOut{ 
+	.logOut {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column !important;
 		align-items: center;
 		cursor: default;
 	}
-
+	.user {
+		font-weight: bold;
+		margin-right: 0 !important;
+		margin-top: 0 !important;
+		margin-bottom: 10px;
+	}
 }
 
-.logo{
+.logo {
 	margin-left: 30px;
-	font-weight:600;
-	letter-spacing:2px ;
+	font-weight: 600;
+	letter-spacing: 2px;
 	font-size: 18px;
 	color: var(--background-color);
 }
 
-.logOut{ 
+.logOut {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	cursor:default;
+	cursor: default;
 }
 
-.user{
- font-weight: bold;
- margin-right: 16px;
- margin-top: 4px;
+.user {
+	font-weight: bold;
+	margin-right: 16px;
+	margin-top: 4px;
 }
 
-.logOutBtn{
+.logOutBtn {
 	padding: 10px;
 	background-color: transparent;
 	border: 1px solid;

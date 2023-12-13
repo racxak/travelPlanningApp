@@ -251,7 +251,6 @@ button{
   display: block; 
 }
 
-
 .btn {
   background: #fff;
     background-color: initial;
@@ -390,6 +389,7 @@ button{
  overflow-y: auto;
  padding-bottom: 0.3rem;
 }
+
 .searchBar{
   height: 2rem;
 }
@@ -457,4 +457,32 @@ button{
   0% { transform: scale(1); }
   50% { transform: scale(0.9); } 
   100% { transform: scale(1); }
+}
+@media (max-width: 585px){
+ .addNew{
+    position: absolute;
+    top: 17vh; 
+    left: 1.1rem;
+   }
+   
+ .search{
+  position: absolute;
+  top: 10vh; 
+  left: 1rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+ }
+ 
+.scroller{
+  position: relative;
+  top: 25vh;
+  max-height: unset;  
+  overflow-y: auto;
+  margin-right: 0.5rem;
+}
+.addNoteMargin{
+  position: relative;
+  top:25vh;
+}
 }

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect,mapRef } from "react";
 import {
-	MapContainer as Mappppp,
+	MapContainer,
 	Marker,
 	TileLayer,
 	Popup,
@@ -21,7 +21,17 @@ import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 import L from "leaflet";
 import styles from "../../pages/Pages.module.css";
 import Search from "./Search";
-import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+
+function MapNewCenterFromMarker({showAt}) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo(showAt, 13);
+  }, [showAt, map]);
+    
+	return null;
+}
 
 function LocateControl({ isLocationAddedRef }) {
 	const map = useMap();
@@ -36,7 +46,8 @@ function LocateControl({ isLocationAddedRef }) {
 	return null;
 }
 
-const MyMap = () => {
+const MyMap = ({centerMarker}) => {
+	const [showMarkerLocationGeocode, setShowMarkerLocationGeocode] = useState([51.107134757977626, 17.016574168441714])
 	const { travelId } = useParams();
 	const ZOOM_LEVEL = 13;
 	const [userMarkers, setUserMarkers] = useState([]);
@@ -46,8 +57,8 @@ const MyMap = () => {
 	const [error, setError] = useState(false);
 	const [openPopupMarkerId, setOpenPopupMarkerId] = useState(null);
 
-	const MapClickHandler = ({ onMapClick }) => {
-		const map = useMapEvents({
+	const MapClickHandler = ({ onMapClick}) => {
+		useMapEvents({
 			click: (e) => {
 				onMapClick(e);
 			},
@@ -121,6 +132,16 @@ const MyMap = () => {
 		}
 	};
 
+useEffect(() => {
+	if (centerMarker.length	!==0){
+		
+	console.log(centerMarker)
+  const newLet = centerMarker[0];
+  const newLang = centerMarker[1];
+  setShowMarkerLocationGeocode([newLet, newLang]);
+	}
+}, [centerMarker]);
+
 	useEffect(() => {
 		fetchMarkersFromDatabase();
 	}, []);
@@ -154,8 +175,8 @@ const MyMap = () => {
 
 	return (
 		<div>
-			<Mappppp
-				center={[51.107134757977626, 17.016574168441714]}
+			<MapContainer 
+				center= {[51.107134757977626, 17.016574168441714]}
 				zoom={ZOOM_LEVEL}
 			>
 				<TileLayer
@@ -220,6 +241,7 @@ const MyMap = () => {
 							</Popup>
 						</Marker>
 					))}
+				<MapNewCenterFromMarker showAt={showMarkerLocationGeocode}/>
 				</MarkerClusterGroup>
 				<ScaleControl />
 				<LocateControl isLocationAddedRef={isLocationAddedRef} />
@@ -227,7 +249,7 @@ const MyMap = () => {
 					provider={new OpenStreetMapProvider()}
 					handleMapClick={handleMapClick}
 				/>
-			</Mappppp>
+			</MapContainer>
 		</div>
 	);
 };

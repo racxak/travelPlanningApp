@@ -9,6 +9,10 @@
   justify-content: center;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
 
 .or {
   color: rgb(191, 191, 191);

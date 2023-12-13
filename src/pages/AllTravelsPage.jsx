@@ -159,7 +159,7 @@ const saveChanges = async (id) => {
 	<div>
 	<Navbar buttons={allTravelsButtons}></Navbar>
 		<div className={styles.pageContainer}>
-
+<div className={styles.searchAddContainer}>
 			<div className={styles.addNew}>
 				<label> Rozpocznij nową podróż</label>
 				<button className={styles.plusBtn} onClick={() => setIsPopupOpen(true)}>
@@ -173,7 +173,8 @@ const saveChanges = async (id) => {
   value={searchTerm}
   onChange={(e) => setSearchTerm(e.target.value)}
   className={styles.searchBar}
-/>		
+/>	
+</div>	
 			</div>
 
 			<AddNote isOpen={isPopupOpen} closePopup={closePopup}>
@@ -285,7 +286,8 @@ const saveChanges = async (id) => {
 							<h2 className={`${styles.noteTitle} ${styles.noteContent}`}>
 								{note.title}
 							</h2>
-							<span>{note.date}</span>
+							<span> {note.date.slice(8, 10)}.{note.date.slice(5,7)}.{note.date.slice(0, 4)}</span>
+							
 						</div>
         )}
 						</div>

@@ -16,7 +16,6 @@ import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { journalNotesInputs } from "../components/journalSource";
 import TravelLists from "../components/travelLists/TravelLists";
 import EmptyPage from "../components/emptyPage/EmptyPage";
 import Spinner from '../components/spinner/Spinner';
@@ -39,6 +38,7 @@ const TravelPage = () => {
 	const [editedMarkerInfo, setEditedMarkerInfo] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [markerGeocode, setMarkerGeocode] = useState([])
 
 	const filteredMarkers = userMarkers.filter((marker) =>
 		`${marker.title} ${marker.geocode[0]} ${marker.geocode[1]} ${marker.info}`
@@ -103,13 +103,17 @@ const TravelPage = () => {
 		}
 	};
 
+	const showMarkerOnMap = (geocode) => {
+		setMarkerGeocode(geocode);
+	}
+
 	return (
 		<div>
 			<Navbar buttons={travelButtons} />
 			<div className={styles.pageContainer}>
 				<h1 className={styles.travelTitleLabel}>{listTitle}</h1>
 				<div className={styles.mapAndNotesContainer}>
-					<MyMap/>
+					<MyMap centerMarker = {markerGeocode}/>
 					<div className={styles.locations}>
 						<h2 className={styles.savedLoc}>Zapisane lokalizacje</h2>
 						
@@ -128,8 +132,8 @@ const TravelPage = () => {
 						{loading===true && <Spinner id="markers"/>}
 
 							{filteredMarkers.map((marker) => (
-									<div
-
+									 <div
+										 onClick={() => showMarkerOnMap(marker.geocode)} 
 										className={styles.markersListItem}
 										key={marker.id}
 									>

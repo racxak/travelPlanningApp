@@ -14,6 +14,7 @@ const SignIn = (props) => {
 	const navigate = useNavigate();
 	const { dispatch } = useContext(AuthContext);
 	const [errors, setErrors] = useState({});
+	const [invalidAccount, setInvalidAccount] = useState(false)
 
 	const signIn = (e) => {
 		e.preventDefault();
@@ -31,7 +32,11 @@ const SignIn = (props) => {
 				navigate("/twoje-podroze");
 			})
 			.catch((error) => {
-				console.log(error);
+				if ( error.code === "auth/invalid-login-credentials")
+				{
+					setInvalidAccount(true);
+				}
+				console.log(error.code);
 			});
 	};
 
@@ -68,7 +73,7 @@ const SignIn = (props) => {
 					className={errors.email ? styles1.errorInput : ""}
 					required
 					type="email"
-					placeholder="jadewtrpia@gmail.com"
+					placeholder="łatwepodróże@gmail.com"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				></input>
@@ -86,7 +91,7 @@ const SignIn = (props) => {
 				{errors.password && (
 					<span className={styles1.errorMessage}>{errors.password}</span>
 				)}
-
+				{invalidAccount && <label className={`${styles1.errorMessage} ${styles.center}`} > Wprowadzono błędne dane</label>}
 				<div style={{ height: "2rem" }}></div>
 				<button
 					className={`${styles1.btn} ${styles.loginAndRegisterBtnWidth}`}

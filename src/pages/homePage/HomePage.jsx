@@ -5,16 +5,14 @@ import Navbar from "../../components/navbar/Navbar";
 
 const HomePage = () => {
 	const homeButtons = [];
-	const [loading, setLoading] = useState(true);
 	const texts = [
 		"Proste planowanie podróży",
 		"Prowadzenie dziennika podróży",
-		"Wszystkie listy w jednym miesjcu",
+		"Wszystkie listy w jednym miejscu",
 		"Proste wprowadzanie zmian do stworzonych planów",
 	];
 
 	const [activeIndex, setActiveIndex] = useState(0);
-	const [isVisible, setIsVisible] = useState(false);
 
 	const prevText = () => {
     setActiveIndex(prevIndex => prevIndex > 0 ? prevIndex - 1 : texts.length - 1);
@@ -27,11 +25,10 @@ const nextText = () => {
 
 useEffect(() => {
     const highResImage = new Image();
-    highResImage.src =  'https://coolwallpapers.me/picsup/5227656-lake-mountain-boat-cloud-landscape-dolomite-wooden-wildsee-water-tyrol-turquoise-trentino-tree-travel-tranquil-tourism-summer-sudtirol-sky-ship-public-domain-images.jpg'; 
+    highResImage.src =  "https://coolwallpapers.me/picsup/5227656-lake-mountain-boat-cloud-landscape-dolomite-wooden-wildsee-water-tyrol-turquoise-trentino-tree-travel-tranquil-tourism-summer-sudtirol-sky-ship-public-domain-images.jpg"; 
 
     highResImage.onload = () => {
-        document.getElementById('backgroundContainer').style.backgroundImage = `url('${highResImage.src}')`;
-    
+        document.getElementById('backgroundContainer').style.backgroundImage ="url(\"${highResImage.src}\")";    
 };
 }
 )

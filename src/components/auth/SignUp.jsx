@@ -28,7 +28,6 @@ const SignUp = (props) => {
 			})
 			.catch((error) => {
 				console.log(error);
-				// todo: obsługa poszczególnych errorów
 			});
 	};
 
@@ -52,7 +51,7 @@ const SignUp = (props) => {
 				<input
 					className={errors.email ? styles1.errorInput : ""}
 					type="email"
-					placeholder="jadewtrpia@gmail.com"
+					placeholder="łatwepodróże@gmail.com"
 					value={success ? "" : email}
 					onChange={(e) => setEmail(e.target.value)}
 				></input>
